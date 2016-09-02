@@ -20,17 +20,12 @@ class Solution {
 public:
 	ListNode* swapPairs(ListNode* head) {
 		if (head == NULL || head->next == NULL){ return head; }
-		ListNode *temp = NULL;
-		temp = head;
+		ListNode *cur = head;
+		//ListNode *temp = head;
 		head = head->next;
-		head->next = temp;
-		if (temp->next->next == NULL || temp->next->next->next == NULL){
-			head->next->next = temp->next->next;
-		}
-		else{
-			head->next->next = temp->next->next->next;
-		}
-		swapPairs(head->next->next);
+		cur->next = cur->next->next;
+		head->next = cur;
+		head->next->next = swapPairs(head->next->next);
 		return head;
 	}
 };
